@@ -13,7 +13,6 @@ use Prwnr\Streamer\Commands\FailedMessages\ListFailedCommand;
 use Prwnr\Streamer\Commands\FailedMessages\RetryFailedCommand;
 use Prwnr\Streamer\Commands\ListCommand;
 use Prwnr\Streamer\Commands\ListenCommand;
-use Prwnr\Streamer\Commands\ListenGroupCommand;
 use Prwnr\Streamer\Contracts\Archiver;
 use Prwnr\Streamer\Contracts\Errors\MessagesFailer;
 use Prwnr\Streamer\Contracts\Errors\Repository;
@@ -44,7 +43,6 @@ class StreamerProvider extends ServiceProvider
         $this->app->singleton(StorageManager::class);
 
         $this->app->bind('Streamer', fn() => $this->app->make(Streamer::class));
-        $this->app->bind('GroupStreamer', fn() => $this->app->make(GroupStreamer::class));
 
         $this->offerPublishing();
         $this->configure();
@@ -86,7 +84,6 @@ class StreamerProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ListenCommand::class,
-                ListenGroupCommand::class,
                 ListCommand::class,
                 ListFailedCommand::class,
                 RetryFailedCommand::class,
