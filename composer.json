@@ -1,5 +1,5 @@
 {
-    "name": "prwnr/laravel-streamer",
+    "name": "debiano/laravel-streamer",
     "description": "Events streaming package for Laravel that uses Redis 5 streams",
     "type": "library",
     "license": "MIT",
