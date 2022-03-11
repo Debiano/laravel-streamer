@@ -87,6 +87,21 @@ class Stream implements Waitable
     }
 
     /**
+     * @param  string  $from
+     * @param  int  $limit
+     *
+     * @return array
+     */
+    public function readGroup(string $group, string $consumer, string $from = self::FROM_START, int $limit = 0): array
+    {
+        if ($limit) {
+            return $this->redis()->xReadGroup($group, $consumer, [$this->name => ">"], $limit);
+        }
+
+        return $this->redis()->xReadGroup($group, $consumer, [$this->name => ">"]);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function await(string $lastSeenId = self::FROM_START, int $timeout = 0): ?array
